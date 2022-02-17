@@ -138,9 +138,9 @@
                             speedup \(s\): ratio of time on one processor, \(t_1\), to time on \(P\) processors, \(t_P\):
                         </p>
                         <div class="fragment">
-                            <script type="math/tex; mode=display">
+                            \[\begin{equation}
                                 s(P) = \frac{t_1}{t_P}
-                            </script>
+                            \end{equation} \]
                         </div>
                     </section>
                     <section>
@@ -165,9 +165,9 @@
                             sizeup \(z\), for a problem size \(N\):
                         </p>
                         <div class="fragment">
-                            <script type="math/tex; mode=display">
+                            \[\begin{equation}
                                 z(P) = \frac{t_1}{t_P} \times \frac{N_P}{N_1}
-                            </script>
+                            \end{equation} \]
                         </div>
                     </section>
                     <section>
@@ -191,18 +191,18 @@
                             Then, the maximum speedup/sizeup for \(P\) processors is:
                         </p>
                         <div class="fragment">
-                            <script type="math/tex; mode=display">
+                            \[\begin{equation}
                                 \max (s(P)) = \frac{1}{\alpha - \frac{1 - \alpha}{P}}
-                            </script>
+                            \end{equation} \]
                         </div>
 
                         <p class="fragment">
                             Then, the theoretically max speedup is:
                         </p>
                         <div class="fragment">
-                            <script type="math/tex; mode=display">
+                            \[\begin{equation}
                                 \max (s) = \frac{1}{\alpha}
-                            </script>
+                            \end{equation} \]
                         </div>
                     </section>
 
@@ -239,21 +239,19 @@
                             that governs the equations of motion for two masses. From Newton's law of gravity:
                         </p>
                         <div class="fragment">
-                            <script type="math/tex; mode=display">
+                            \[\begin{equation}
                                 \frac{dp}{dt} = G \frac{m_1 m_2}{r^2}
-                            </script>
+                            \end{equation} \]
                         </div>
                     </section>
                     <section>
                         <h3>Equations of motion:</h3>
                         <br/>
-                        <div class="fragment">
-                            <script type="math/tex; mode=display">
-                                \begin{aligned}
+                        <div class="fragment" style="font-size:24px">
+                            \[\begin{aligned}
                                 \mathbf{x}_{i,s} & = G \sum_{j=1, i \neq j} \frac{m_j (\mathbf{x}_{j,s-1} - \mathbf{x}_{i,s-1})}{||\mathbf{x}_{j,s-1} - \mathbf{x}_{i,s-1}||^3} \Delta t^2 + \mathbf{v}_{i,s-1} \Delta t + \mathbf{x}_{i,s-1} \\
                                 \mathbf{v}_{i,s} & = G \sum_{j=1, i \neq j} \frac{m_j (\mathbf{x}_{j,s-1} - \mathbf{x}_{i,s-1})}{||\mathbf{x}_{j,s-1} - \mathbf{x}_{i,s-1}||^3} \Delta t + \mathbf{v}_{i,s-1}
-                                \end{aligned}
-                            </script>
+                            \end{aligned} \]
                         </div>
                     </section>
 
@@ -567,6 +565,7 @@
 		<script src="plugin/notes/notes.js"></script>
 		<script src="plugin/markdown/markdown.js"></script>
 		<script src="plugin/highlight/highlight.js"></script>
+        <script src="plugin/math/math.js"></script>
 		<script>
 			// More info about initialization & config:
 			// - https://revealjs.com/initialization/
@@ -575,7 +574,8 @@
 				hash: true,
 
 				// Learn about plugins: https://revealjs.com/plugins/
-				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
+				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes, RevealMath.KaTeX ],
+
 			});
 		</script>
 
