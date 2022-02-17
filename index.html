@@ -3,24 +3,24 @@
 
 	<head>
 		<meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-                <title>Software Development for Engineering Research - Parallel Computing</title>
+        <title>Software Development for Engineering Research - Parallel Computing</title>
 
-                <meta name="description" content="
-                Lecture on parallel computing for ME 599: Software Development for Engineering Research
-                ">
+        <meta name="description" content="
+        Lecture on parallel computing for ME 599: Software Development for Engineering Research
+        ">
 		<meta name="author" content="Kyle Niemeyer">
 
 		<meta name="apple-mobile-web-app-capable" content="yes" />
 		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-
-		<link rel="stylesheet" href="css/reveal.css">
-		<link rel="stylesheet" href="css/theme/simple.css" id="theme">
+        <link rel="stylesheet" href="dist/reset.css">
+		<link rel="stylesheet" href="dist/reveal.css">
+		<link rel="stylesheet" href="dist/theme/simple.css" id="theme">
 
 		<!-- For syntax highlighting -->
-		<link rel="stylesheet" href="lib/css/zenburn.css">
+		<link rel="stylesheet" href="plugin/highlight/monokai.css">
 
 		<!-- If the query includes 'print-pdf', include the PDF print sheet -->
 		<script>
@@ -48,7 +48,7 @@
                     <h2>Intro. to Parallel Computing</h2>
                     <h3>Software Development for Engineering Research</h3>
                     <br/>
-                    <h3>Kyle Niemeyer. 28 April 2020</h3>
+                    <h3>Kyle Niemeyer. 17 February 2022</h3>
                     <h3>ME 599, Corvallis, OR</h3>
                 </section>
                 <section>
@@ -101,7 +101,7 @@
                     <section>
                         <h3>Scale and Scalability</h3>
                         <br/>
-                        <img class="fragment" src="./images/sense-and-sensibility.jpg" height="500" alt="Scale and Scalability 'book' image">
+                        <img src="./images/sense-and-sensibility.jpg" height="500" alt="Scale and Scalability 'book' image">
                     </section>
 
                     <section>
@@ -518,48 +518,65 @@
                         <p class="fragment">Can be used in Python and NumPy arrays with <code>mpi4py</code></p>
                     </section>
                 </section>
+                <section>
+                    <section>
+                        <h3>numba: just-in-time compiler for Python/NumPy</h3>
+                        <p class="fragment">translates Python functions to optimized machine code at runtime using the LLVM compiler</p>
 
+                        <p class="fragment">does not require a separate compiler, just decorators</p>
+
+                        <p class="fragment">can automatically parallelize loops</p>
+                    </section>
+
+                    <section>
+                        <div style="font-size:28px">
+                            <pre><code data-trim class="python">
+                            from numba import jit
+                            import random
+
+                            @jit(nopython=True)
+                            def monte_carlo_pi(nsamples):
+                                acc = 0
+                                for i in range(nsamples):
+                                    x = random.random()
+                                    y = random.random()
+                                    if (x ** 2 + y ** 2) < 1.0:
+                                        acc += 1
+                                return 4.0 * acc / nsamples
+                            </code></pre>
+                        </div>
+                    </section>
+                </section>
+                <section>
+                    <section data-markdown>
+                        <textarea data-template>
+                            ### Takeaways
+        
+                            If your problem calls for it, consider parallelizing.
+
+                            That said, do not jump here, when implementing smart NumPy array operations,
+                            appropriate data structures, or existing solutions may suffice.
+                        </textarea>
+                    </section>
+                </section>
 			</div>
 
 		</div>
 
-		<script src="lib/js/head.min.js"></script>
-		<script src="js/reveal.js"></script>
-
+		<script src="dist/reveal.js"></script>
+		<script src="plugin/notes/notes.js"></script>
+		<script src="plugin/markdown/markdown.js"></script>
+		<script src="plugin/highlight/highlight.js"></script>
 		<script>
-
-			// Full list of configuration options available here:
-			// https://github.com/hakimel/reveal.js#configuration
+			// More info about initialization & config:
+			// - https://revealjs.com/initialization/
+			// - https://revealjs.com/config/
 			Reveal.initialize({
-				controls: true,
-				progress: true,
-				history: true,
-				center: true,
+				hash: true,
 
-				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
-				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
-
-                math: {
-                    mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',
-                    config: 'TeX-AMS_HTML-full'  // See http://docs.mathjax.org/en/latest/config-files.html
-                },
-
-				// Parallax scrolling
-				// parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
-				// parallaxBackgroundSize: '2100px 900px',
-
-				// Optional libraries used to extend on reveal.js
-				dependencies: [
-					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
-					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
-					{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
-					{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } },
-                    { src: 'plugin/math/math.js', async: true }
-				]
+				// Learn about plugins: https://revealjs.com/plugins/
+				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
 			});
-
 		</script>
 
 	</body>
